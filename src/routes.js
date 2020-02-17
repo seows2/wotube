@@ -47,8 +47,6 @@ const ADD_COMMENT = "/:id/comment"
 const DELETE_COMMENT = "/:id/delete"
 
 
-
-
 const routes = {
     home: HOME,
     join: JOIN,
