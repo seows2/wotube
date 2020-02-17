@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import express from "express" //노드js 익스프레스
 import morgan from "morgan" //로그
 import helmet from "helmet" //보안

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import "@babel/polyfill"
 import dotenv from "dotenv";
 import "./db";
