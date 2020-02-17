@@ -62,7 +62,7 @@ globalRouter.get(routes.kakaoCallback, passport.authenticate('kakao', {
 
 
 globalRouter.get("/img", function (req, res){
-    let num = genRandom();
+    const num = genRandom()+1;
     fs.readFile(`src/logo/${num}.png`, function(error, data){
         res.writeHead(200, { "Content-Type" : "text/html"});
         res.end(data);
@@ -70,7 +70,7 @@ globalRouter.get("/img", function (req, res){
 });
 
 const genRandom = () => {
-    const number = Math.floor(Math.random() * 3);
+    const number = Math.floor(Math.random() * 4);
     return number;
 }
 
