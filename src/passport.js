@@ -19,7 +19,7 @@ passport.use(new GithunStrategy({
 passport.use(new FacebookStrategy({
     clientID: process.env.FB_ID,
     clientSecret: process.env.FB_SECRET,
-    callbackURL: `https://thin-yak-44.localtunnel.me${routes.facebookCallback}`,
+    callbackURL: `https://morning-plateau-84854.herokuapp.com${routes.facebookCallback}`,
     profileFields: ['id', 'displayName', 'photos', 'email'],
     scope: ['public_profile', 'email']
   },facebookLoginCallback))
