@@ -60,7 +60,7 @@ globalRouter.get(routes.kakaoCallback, passport.authenticate('kakao', {
 }), postKakaoLogin);
 
 globalRouter.get("/img", function (req, res){
-    fs.readFile("logo/1.png", function(error, data){
+    fs.readFile("src/logo/1.png", function(error, data){
         res.writeHead(200, { "Content-Type" : "text/html"});
         res.end(data);
     });
