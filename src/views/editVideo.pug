@@ -1,0 +1,11 @@
+extends layouts/main
+
+block content
+    .form-container
+        form(action=routes.editVideo(video.id), method="post")
+            input(type="text", placeholder="제목", name="title",autocomplete="off", value=video.title)
+            textarea(name="description", placeholder="영상 설명", autocomplete="off")=video.description
+            input(type="submit", value="확인")
+        a.form-container__link(href=routes.deleteVideo(video.id))
+            button.delete 비디오 삭제
+

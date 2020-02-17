@@ -1,0 +1,41 @@
+extends layouts/main
+
+block content
+   .video-detail__container
+        .video__player
+            video(src= `${video.fileURL}`, controls=true)
+        .video__info
+            if loggedUser && (video.creator.id == loggedUser.id)
+                a(href=routes.editVideo(video.id))
+                    button 비디오 수정
+            h5.video__title=video.title
+            span.video__views 조회수 #{video.views}회 
+            span.video__createdAt #{video.createdAt}
+            .video__author
+                a(href=routes.userDetail(video.creator.id))
+                    img.vd-avatar(src=`${video.creator.avatarUrl}`)
+                    span.video__author-name #{video.creator.name}
+            p.video__description= video.description
+        .video__comments
+            if video.comment.length === 1
+                span.video__comment-number 댓글 1개
+            else
+                span.video__comment-number 댓글 #{video.comment.length}개
+            form.add__comment#jsAddComment
+                input(type="text", placeholder = " 댓글 추가")
+            ul.video__comments-list#jsCommentList
+                each comments in video.comment.reverse()
+                    li
+                        .author-thumbnail
+                            a(href=routes.userDetail(comments.creator.id))
+                                img.vd-avatar(src=`${comments.creator.avatarUrl}`)
+                        .main
+                            .comment-container
+                                .header-author
+                                    a(href=routes.userDetail(comments.creator.id))
+                                        span.author__name #{comments.creator.name}
+                                .content-text
+                                        span.author__text #{comments.text}
+                            .content-option
+                                if loggedUser && (comments.creator.id == loggedUser.id)
+                                    i.fas.fa-trash-alt(id=comments.id)

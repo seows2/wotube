@@ -1,0 +1,41 @@
+.social-login{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    a{
+        width: 100%;
+        max-width: 320px;
+        
+        &:not(:last-child){
+            margin-bottom: 10px;
+        }
+
+        span {
+            i{
+                margin-right: 10px;
+                font-size: 30px;
+            }
+            
+            
+            
+        }
+        .social-login__filed{
+            font-size: 16px;
+        }
+        
+    }
+    .social-login--github {
+        background-color: black;
+        color: white;
+    }
+    .social-login--Kakaotalk {
+        background-color: #F7E600;
+        color: black;
+    }
+    .social-login--facebook {
+        background-color: #3a5998;
+        color: white;
+    }
+}
