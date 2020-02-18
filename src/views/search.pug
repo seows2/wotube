@@ -4,13 +4,13 @@ include mixin/videoBlock
 block content
     .search__header
         h3 Searching for #{searchingBy}
-    .search__videos
+    .home-videos
         if videos.length===0
             h5 해당되는 비디오를 찾지 못했습니다.
         each video in videos
                 +videoBlock({
                     title : video.title,
                     views : video.views,
-                    videoFile : video.videoFile,
+                    videoFile : video.fileURL,
                     id : video.id
                 })

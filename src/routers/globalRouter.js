@@ -42,6 +42,7 @@ globalRouter.get(routes.search, search);
 globalRouter.get(routes.github, githubLogin);
 
 globalRouter.get(routes.githubCallback, passport.authenticate('github', {
+    successFlash: "반갑습니다!",
     failureRedirect: '/login'
 }), postGithubLogin);
 
@@ -50,12 +51,14 @@ globalRouter.get(routes.githubCallback, passport.authenticate('github', {
 globalRouter.get(routes.facebook, facebookLogin);
 
 globalRouter.get(routes.facebookCallback, passport.authenticate('facebook', {
+    successFlash: "반갑습니다!",
     failureRedirect: '/login'
 }), postFacebookLogin);
 
 globalRouter.get(routes.kakao, kakaoLogin);
 
 globalRouter.get(routes.kakaoCallback, passport.authenticate('kakao', {
+    successFlash: "반갑습니다!",
     failureRedirect: '/login'
 }), postKakaoLogin);
 

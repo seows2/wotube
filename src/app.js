@@ -9,6 +9,8 @@ import mongoose from "mongoose";
 import session from "express-session" // 세션관리 사용자 세션
 import path from "path";
 import mongoStore from "connect-mongo"; //기존 세션 저장
+import flash from "express-flash";
+
 
 import userRouter from "./routers/userRouter"
 import videoRouter from "./routers/videoRouter"
@@ -44,6 +46,7 @@ app.use(session({
         mongooseConnection: mongoose.connection
     })
 }));
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 

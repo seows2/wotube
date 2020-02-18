@@ -9,7 +9,6 @@ export const getJoin = (req, res) => {
 
 }
 export const postJoin = async (req, res, next) => {
-    console.log(req.body);
     const {
         body: {
             name,
@@ -19,6 +18,7 @@ export const postJoin = async (req, res, next) => {
         }
     } = req;
     if (password !== password2) {
+        req.flash("error","패스워드가 일치하지 않습니다.")
         res.status(400);
         res.redirect(routes.join);
     } else {
@@ -30,7 +30,6 @@ export const postJoin = async (req, res, next) => {
             await User.register(user,password);
             next();
         } catch (error) {
-            console.log(error);
             res.redirect(routes.home);
         }
 
@@ -45,12 +44,16 @@ export const getlogin = (req, res) => {
 }
 
 export const postlogin = passport.authenticate('local', {
-
     failureRedirect: routes.login,
-    successRedirect: routes.home
+    successRedirect: routes.home,
+    successFlash: "반갑습니다!",
+    failureFlash: "로그인 실패, 아이디와 비밀번호를 확인해 주세요"
 });
 
-export const githubLogin = passport.authenticate('github');
+export const githubLogin = passport.authenticate('github',{
+    successFlash: "반갑습니다!",
+    failureFlash: "현재 깃허브 로그인을 사용할 수 없습니다."
+});
 
 export const githubLoginCallback = async (_, __, profile, cb) => {
     const {
@@ -94,7 +97,10 @@ export const postGithubLogin = (req, res) => {
     res.redirect(routes.home);
 }
 
-export const facebookLogin = passport.authenticate('facebook');
+export const facebookLogin = passport.authenticate('facebook',{
+    successFlash: "반갑습니다!",
+    failureFlash: "현재 페이스북 로그인을 사용할 수 없습니다."
+});
 
 export const facebookLoginCallback = async (_, __, profile, cb) =>{
     const {_json : { id, name, email } } = profile;
@@ -128,7 +134,10 @@ export const postFacebookLogin = (req,res) =>{
     res.redirect(routes.home);
 }
 
-export const kakaoLogin = passport.authenticate("kakao");
+export const kakaoLogin = passport.authenticate("kakao",{
+    successFlash: "반갑습니다!",
+    failureFlash: "현재 카카오톡 로그인을 사용할 수 없습니다."
+});
 
 export const kakaoLoginCallback = async (_, __, profile, done) => {
     const {_json : { id, properties: { nickname, profile_image }, kakao_account : { email } } } = profile;
@@ -164,6 +173,7 @@ export const postKakaoLogin = (req,res) =>{
 }
 
 export const logout = (req, res) => {
+    req.flash("info", "다음에 만나요!");
     req.logout();
     res.redirect(routes.home);
 }
@@ -180,10 +190,9 @@ export const userDetail = async (req, res) => {
     } = req
     try {
         const user = await User.findById(id).populate('videos');
-        console.log(user);
         res.render("userDetail", { pageTitle: "User Detail", user });
     } catch (error) {
-        console.log(error);
+        req.flash("error","유저를 찾을 수 없습니다");
         res.redirect(routes.home);
     }
 }
@@ -204,9 +213,11 @@ export const postEditProfile = async (req, res) =>{
             email,
             avatarUrl : file ? `${file.location}` : `${req.user.avatarUrl}`
         });
+        req.flash("success", "프로필 업데이트 완료")
         res.redirect(routes.userDetail(req.user.id));
     } catch (error) {
         res.redirect(routes.editProfile(req.user.id), { pageTitle: "Edit Profile" });
+        req.flash("error", "프로필 업데이트 실패, 잠시 후 다시 시도해 주세요")
     }
 };
 
@@ -227,12 +238,15 @@ export const postChangePassword = async (req, res) => {
         if(newPassword !== newPassword1){
             res.status(400);
             res.redirect(routes.changePassword, { pageTitle: "Change Password" });
+            req.flash("error","비밀번호를 다시 확인해주세요");
             return;
         } 
         await req.user.changePassword(oldPasswod,newPassword);
+        req.flash("success","비밀번호 변경 완료")
         res.redirect(routes.myPage);
     } catch (error) {
         res.status(400);
         res.redirect(routes.changePassword, { pageTitle: "Change Password" });
+        req.flash("error","비밀번호 변경 실패 잠시 후 다시 시도해주세요")
     }
 }

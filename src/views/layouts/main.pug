@@ -1,3 +1,5 @@
+include ../mixin/message
+
 doctype html
 html
     head
@@ -7,11 +9,25 @@ html
         meta(http-equiv="Cache-Control" content="no-cache")
         meta(http-equiv="Expires" content="0")
         meta(http-equiv="Pragma" content="no-cache")
-        
         link(rel="stylesheet", href="/static/styles.css")
     body
         include ../partials/header
         main
             block content
         include ../partials/footer
+        if messages.error
+            +message({
+                type: "error",
+                text: messages.error
+            })
+        else if messages.info
+            +message({
+                type: "info" ,
+                text: messages.info
+            })
+        else if messages.success
+            +message({
+                type: "success",
+                text: messages.success
+            })
         script(src="/static/main.js")

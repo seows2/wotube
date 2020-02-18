@@ -1,0 +1,39 @@
+@keyframes flashAnimation{
+    0% {
+        transform: translateY(+70px);
+    }
+    5%{
+        transform: translateY(0px);
+    }
+    90%{
+        transform: translateY(0px);
+    }
+    100%{
+        transform: translateY(+70px);
+    }
+}
+
+
+.flash-massage__container{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    max-width: 360px;
+    padding: 20px;
+    text-align: center;
+    animation: flashAnimation 5s ease-in-out forwards;
+    &.error{
+        background-color: red;
+    }
+    &.success{
+        background-color: green;
+    }
+    &.info{
+        background-color: blue;
+    }
+    .flash-massage__text{
+        color: white;
+        font-size: 14px;
+    }
+}
