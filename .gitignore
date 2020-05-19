@@ -80,3 +80,4 @@ uploads
 static
 build
 .eslintrc.js
+.DS_Store
