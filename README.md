@@ -41,26 +41,50 @@ const PORT = 원하는 포트;
 
 ## 폴더 구조 설명
 
-- assets
+- ### assets
+
   - js  
     자바스크립트를 통한 html 태그 생성 로직입니다. 댓글 추가, 삭제, 비디오 녹화 로직이고 전부 main.js에 임포트 시켜서 관리하고 있습니다.
   - scss  
     scss 파일입니다. css와 같습니다. 전부 styles.scss에 임포트 시켜 관리합니다.
-- controllers  
+
+<br>
+
+- ### controllers
+
   MVC패턴중 Conroller 부분입니다. user 로직과 video 로직 2가지의 컨트롤러로 나눴고, userController에는 로그인, 회원가입, 프로파일 변경등 videoController는 홈화면 렌더, 업로드, 검색, 댓글등의 로직이 있습니다.
-- model  
+
+  <br>
+
+- ### model
+
   DB입니다. Comment, User, Video DB가 있습니다.
-- routers  
-   서버오는 URL 주소와 GET, POST 요청에 따라 수행해야하는 Conroller를 적어놓은 것 입니다 예를 들면 globalRouter에 L.23은
+
+  <br>
+
+- ### routers
+
+  서버오는 URL 주소와 GET, POST 요청에 따라 수행해야하는 Conroller를 적어놓은 것 입니다 예를 들면 globalRouter에 L.23은
+
   ```js
   globalRouter.post(routes.join, onlyPublic, postJoin, postlogin);
   ```
+
   **routes.join (/join) URL**을 통해 **post** 요청이 오면 onlyPublic 함수와 PostJoin 함수, postLogin 함수를 실행하라 라는 문장입니다.
-- view  
+
+  <br>
+
+- ### view
+
   html 입니다. pug를 기반으로 짰지만 html을 아시면 이해하는데 큰 무리 없습니다.
-- middlewares.js  
-   라우터 요청 중간중간에 끼어들어 실행될 수 있는 함수?? 입니다. 예를 들면 localMiddleware 함수를 보면 res메세지 siteName에 KGU web이라는 이름을 붙여준걸 볼 수 있는데 홈페이지 타이틀에 KGU web이 어느 URL을 가든 따라가는 모습을 볼 수 있습니다.  
+
+  <br>
+
+- ### middlewares.js
+
+  라우터 요청 중간중간에 끼어들어 실행될 수 있는 함수?? 입니다. 예를 들면 localMiddleware 함수를 보면 res메세지 siteName에 KGU web이라는 이름을 붙여준걸 볼 수 있는데 홈페이지 타이틀에 KGU web이 어느 URL을 가든 따라가는 모습을 볼 수 있습니다.  
    또한 loggedUser같은 경우에는 req.user 또는 null 값을 붙여줬는데 만약 유저가 로그인 상태라면 req.user라는 값이 있지만 비로그인시에는 존재하지 않습니다.
+
   ```js
   export const localMiddleware = (req, res, next) => {
     console.log(req.user);
@@ -70,9 +94,13 @@ const PORT = 원하는 포트;
     next();
   };
   ```
+
   위처럼 변경한 뒤 홈페이지를 돌아다니며 찍히는 log를 보시면 이해가 쉬울 겁니다.  
   이를 응용하여 onlyPublic (오직 비로그인 유저만 접근 가능) onlyPrivate (오직 로그인 유저만 접근 가능) 등의 로직을 만들었습니다.
-- routes
+
+  <br>
+
+- ### routes
   사용되는 라우터를 정리하며 파일에 객체로 표현했습니다.
 
 <br>
