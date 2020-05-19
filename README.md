@@ -64,7 +64,7 @@ const PORT = 원하는 포트;
 
 - ### routers
 
-  서버오는 URL 주소와 GET, POST 요청에 따라 수행해야하는 Conroller를 적어놓은 것 입니다 예를 들면 globalRouter에 L.23은
+  서버로 오는 URL 주소와 GET, POST 요청에 따라 수행해야하는 Conroller를 적어놓은 것 입니다 예를 들면 globalRouter에 L.23은
 
   ```js
   globalRouter.post(routes.join, onlyPublic, postJoin, postlogin);
