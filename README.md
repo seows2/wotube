@@ -1,6 +1,6 @@
 # 웹설
 
-## nodeJS랑 몽고DB 까셔야 합니다!!!
+## [nodeJS](https://nodejs.org/en/)랑 [몽고DB](https://www.mongodb.com/download-center/community) 까셔야 합니다!!!
 
 까신 뒤
 
@@ -26,7 +26,7 @@ npm install
 
 <br>
 
-서버 키기 위해서 터미널에서 `npm run dev:server` 입력해주세요.  
+서버를 키기 위해서 터미널에서 `npm run dev:server` 입력해주세요.  
 css 작업을 하기 위해서는 또 다른 터미널에서 `npm run dev:assets` 또한 입력해주세요.  
 vscode와 크롬을 통한 개발을 추천드립니다.  
 기본 PORT는 4000번이나 PORT 번호 바꿔야 하시는 분은 .env파일에서 PORT를 바꾸시거나 init.js 파일에서
