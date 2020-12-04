@@ -1,7 +1,7 @@
 extends layouts/main
 
-block content
-    .form-container
+block modal
+    .form-container.modal.hidden
         form(action = routes.login, method ="post")
             input(type="email", name = "email", placeholder =" 이메일" autocomplete="off")
             input(type="password", name = "password", placeholder =" 비밀번호" autocomplete="off")
